@@ -9,19 +9,20 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 const urlStruct = {
   GET: {
     '/': htmlHandler.getIndex,
+    '/listings': htmlHandler.listings,
     '/style.css': htmlHandler.getCSS,
-    '/getUsers': jsonHandler.getUsers,
-    '/updateUser': jsonHandler.updateUser,
+    '/getListings': jsonHandler.getListings,
+    '/updateListings': jsonHandler.updateListings,
     notFound: jsonHandler.notFound,
   },
   HEAD: {
-    '/getUsers': jsonHandler.getUsersMeta,
+    '/getListings': jsonHandler.getListingsMeta,
     notFound: jsonHandler.notFoundMeta,
   },
 };
 
 const handlePost = (request, response, parsedUrl) => {
-  if (parsedUrl.pathname === '/addUser') {
+  if (parsedUrl.pathname === '/addListing') {
     const body = [];
 
     request.on('error', (err) => {
@@ -38,7 +39,7 @@ const handlePost = (request, response, parsedUrl) => {
       const bodyString = Buffer.concat(body).toString();
       const bodyParams = query.parse(bodyString);
 
-      jsonHandler.addUser(request, response, bodyParams);
+      jsonHandler.addListing(request, response, bodyParams);
     });
   }
 };

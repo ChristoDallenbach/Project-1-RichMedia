@@ -1,4 +1,4 @@
-const users = {};
+const listings = {};
 
 const respondJSON = (request, response, status, object) => {
   const headers = {
@@ -19,24 +19,24 @@ const respondJSONMeta = (request, response, status) => {
   response.end();
 };
 
-const getUsers = (request, response) => {
+const getListings = (request, response) => {
   const responseJSON = {
-    users,
+    listings,
   };
 
   return respondJSON(request, response, 200, responseJSON);
 };
 
-const getUsersMeta = (request, response) => respondJSONMeta(request, response, 200);
+const getListingsMeta = (request, response) => respondJSONMeta(request, response, 200);
 
-const updateUser = (request, response) => {
-  const newUser = {
+const updateListing = (request, response) => {
+  const newListing = {
     createdAt: Date.now(),
   };
 
-  users[newUser.createdAt] = newUser;
+  listings[newListing.createdAt] = newListing;
 
-  return respondJSON(request, response, 201, newUser);
+  return respondJSON(request, response, 201, newListing);
 };
 
 const notFound = (request, response) => {
@@ -49,25 +49,30 @@ const notFound = (request, response) => {
 
 const notFoundMeta = (request, response) => respondJSONMeta(request, response, 404);
 
-const addUser = (request, response, body) => {
+const addListing = (request, response, body) => {
   const responseJSON = {
-    message: 'name and age are both required',
+    message: 'Listing name, price, and user info are all required',
   };
 
-  if (!body.name || !body.age) {
+    console.log(body.itemName);
+    console.log(body.price);
+    console.log(body.email);
+    
+  if (!body.itemName || !body.price || !body.email) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
 
   let responseCode = 201;
-  if (users[body.name]) {
+  if (listings[body.name]) {
     responseCode = 204;
   } else {
-    users[body.name] = {};
+    listings[body.name] = {};
   }
 
-  users[body.name].name = body.name;
-  users[body.name].age = body.age;
+  listings[body.name].name = body.itemName;
+  listings[body.name].price = body.price;
+  listings[body.name].email = body.email;
 
   if (responseCode === 201) {
     responseJSON.message = 'Created Successfully';
@@ -78,10 +83,10 @@ const addUser = (request, response, body) => {
 };
 
 module.exports = {
-  getUsers,
-  getUsersMeta,
-  updateUser,
+  getListings,
+  getListingsMeta,
+  updateListing,
   notFound,
   notFoundMeta,
-  addUser,
+  addListing,
 };

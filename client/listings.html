@@ -37,37 +37,33 @@
       	content.innerHTML += `<p>metadata received</p>`;
       }
     };
-
-    const sendPost = (e, listingForm) => {
-      e.preventDefault();
-        
-      const nameAction = listingForm.getAttribute('action');
-      const nameMethod = listingForm.getAttribute('method');
       
-      const nameField = listingForm.querySelector('#nameField');
-      const priceField = listingForm.querySelector('#priceField');
-      const emailField = listingForm.querySelector('#emailField');
-        
+    const requestUpdate = (e, userForm) => {
+      const url = userForm.querySelector('#urlField').value;
+      const method = userForm.querySelector('#methodSelect').value;
+      
       const xhr = new XMLHttpRequest();
-      xhr.open(nameMethod, nameAction);
-        
-      xhr.setRequestHeader('Accept', 'application/json');
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        
-      xhr.onload = () => handleResponse(xhr, true);
-        
-      const formData = `itemName=${nameField.value}&price=${priceField.value}&email=${emailField.value}`;
-      xhr.send(formData);  
+      xhr.open(method,url);
+      xhr.setRequestHeader("Accept","application/json");
+      if(method === 'get'){
+      	xhr.onload = () => handleResponse(xhr,true);
+      }else{
+      	xhr.onload = () => handleResponse(xhr,false);
+      }
       
-      return false;
+      xhr.send();
+      
+			e.preventDefault();
+			return false;
     };
 
     const init = () => {
+      const userForm = document.querySelector('#userForm');
       const listingForm = document.querySelector('#listingForm');
       
-      const addListing = (e) => sendPost(e,listingForm);
-        
-      listingForm.addEventListener('submit', addListing);
+      const getListings = (e) => requestUpdate(e, userForm);
+      
+      userForm.addEventListener('submit', getListings);
     };
 
     window.onload = init;
@@ -75,15 +71,17 @@
 </head>
 <body>
   <section id="top">
-    <h3>Add an item</h3>
-    <form id="listingForm" action="/addListing" method="post">
-      <label for="itemName">Item Name: </label>
-      <input id="nameField" type="text" name="itemName" />
-      <label for="price">Price: </label>
-      <input id="priceField" type="number" name="price" min="0" max="10000" step="1"/>
-      <label for="email">Your Email: </label>
-      <input id="emailField" type="text" name="email" />
-      <input type="submit" value="Add Listing" />
+    <h3>Marketplace</h3>
+    <form id="userForm" action="/getListings" method="get">
+      <select id='urlField'>
+        <option value='/getListings'>/getListings</option>
+        <option value='/notReal'>/notReal</option>
+      </select>
+      <select id="methodSelect">
+        <option value="get">GET</option>
+        <option value="head">HEAD</option>
+      </select>
+      <input type="submit" value="Get Listings" />
     </form>
   </section>
   <section id="content">
