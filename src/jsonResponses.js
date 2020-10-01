@@ -54,11 +54,11 @@ const addListing = (request, response, body) => {
     message: 'Listing name, price, and user info are all required',
   };
 
-    console.log(body.itemName);
+    console.log(body.name);
     console.log(body.price);
     console.log(body.email);
     
-  if (!body.itemName || !body.price || !body.email) {
+  if (!body.name || !body.price || !body.email) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
@@ -70,7 +70,7 @@ const addListing = (request, response, body) => {
     listings[body.name] = {};
   }
 
-  listings[body.name].name = body.itemName;
+  listings[body.name].name = body.name;
   listings[body.name].price = body.price;
   listings[body.name].email = body.email;
 

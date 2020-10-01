@@ -56,7 +56,7 @@
         
       xhr.onload = () => handleResponse(xhr, true);
         
-      const formData = `itemName=${nameField.value}&price=${priceField.value}&email=${emailField.value}`;
+      const formData = `name=${nameField.value}&price=${priceField.value}&email=${emailField.value}`;
       xhr.send(formData);  
       
       return false;
@@ -74,11 +74,12 @@
   </script>
 </head>
 <body>
+  <section id="link"><a href="listings">Go to Listings</a></section>
   <section id="top">
     <h3>Add an item</h3>
     <form id="listingForm" action="/addListing" method="post">
-      <label for="itemName">Item Name: </label>
-      <input id="nameField" type="text" name="itemName" />
+      <label for="name">Item Name: </label>
+      <input id="nameField" type="text" name="name" />
       <label for="price">Price: </label>
       <input id="priceField" type="number" name="price" min="0" max="10000" step="1"/>
       <label for="email">Your Email: </label>
