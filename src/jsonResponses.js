@@ -22,8 +22,8 @@ const respondJSONMeta = (request, response, status) => {
 const getListings = (request, response) => {
   const responseJSON = {
     listings,
-  };
-
+  };   
+    
   return respondJSON(request, response, 200, responseJSON);
 };
 

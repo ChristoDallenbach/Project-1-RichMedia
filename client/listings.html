@@ -31,8 +31,17 @@
       
       if(parseResponse){
       	const obj = JSON.parse(xhr.response);
-      	console.dir(obj);
-      	content.innerHTML += `<p>${xhr.response}</p>`;
+      	//console.dir(obj);
+      	//content.innerHTML += `<p>${xhr.response}</p>`;
+        for(let listing of Object.keys(obj.listings)){
+          content.innerHTML += 
+            `<div>
+                <h4>${obj.listings[listing].name}</h3>
+                <p>Price is $${obj.listings[listing].price}</p>
+                <p>${obj.listings[listing].email}</p>
+            </div>`;
+        }  
+          
       }else{
       	content.innerHTML += `<p>metadata received</p>`;
       }
