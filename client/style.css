@@ -1,21 +1,111 @@
+/* HTML CSS */
+
+* {
+    box-sizing: border-box;
+}
+
 html, body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: bisque;
 }
 
 #top {
-  text-align: center;
-  margin: 0 auto;
+    text-align: center;
+    margin: 0 auto;
 }
 
 #top h1 {
-  font-size: 2em;
+    font-size: 2em;
 }
 
 #content {
-  margin-top: 100px;
-  font-size: 2em;
-  text-align: center;
+    margin-top: 100px;
+    font-size: 2em;
+    text-align: center;
 }
+
+h3 {
+    font-family: 'Crimson Text', serif;
+    font-size: 32px;
+}
+
+a {
+    text-decoration: none;
+    border-radius: 14px;
+}
+
+a:link {
+    background-color: white;
+    color: black;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:visited {
+    background-color: white;
+    color: black;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover {
+    background-color: #aec6cf;
+    color: white;
+}
+
+a:active {
+    background-color: #aec6cf;
+    color: white;
+}
+
+#link {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 14px;
+}
+
+/* Input Field CSS */
+/* font-family: 'Crimson Text', serif; font-family: 'Source Sans Pro', sans-serif; */
+
+#inputDiv {
+    width: 60%;
+}
+
+label {
+    font-family: 'Source Sans Pro', sans-serif;
+    position: relative;
+    display: block;
+}
+
+input {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    outline: none;
+    font-family: 'Source Sans Pro', sans-serif;
+    width: 60%;
+    display: inline-block;
+    float: center;
+}
+
+input[type=text] {
+    
+}
+
+input[type=number] {
+    
+}
+
+input[type=email] {
+    
+}
+
+/* Json Response CSS */

@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <title>Marketplace</title>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Source+Sans+Pro&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/style.css">
-  
+    
   <script>
     const handleResponse = (xhr, parseResponse) => {
       const content = document.querySelector('#content');
@@ -78,12 +79,18 @@
   <section id="top">
     <h3>Add an item</h3>
     <form id="listingForm" action="/addListing" method="post">
-      <label for="name">Item Name: </label>
-      <input id="nameField" type="text" name="name" />
-      <label for="price">Price: </label>
-      <input id="priceField" type="number" name="price" min="0" max="10000" step="1"/>
-      <label for="email">Your Email: </label>
-      <input id="emailField" type="email" name="email" />
+      <div class="inputDiv">
+        <label for="name">Item Name: </label>
+        <input id="nameField" type="text" name="name" />
+      </div>
+      <div class="inputDiv">
+        <label for="price">Price: </label>
+        <input id="priceField" type="number" name="price" min="0" max="10000" step="1"/>
+      </div>
+      <div class="inputDiv">
+        <label for="email">Your Email: </label>
+        <input id="emailField" type="email" name="email" />
+      </div>
       <input type="submit" value="Add Listing" />
     </form>
   </section>
