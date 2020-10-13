@@ -6,12 +6,13 @@
   <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script>
-    const handleResponse = (xhr, parseResponse) => {
+    const handleResponse = (xhr, parseResponse, maxPrice) => {
       const content = document.querySelector('#content');
-      
+      content.innerHTML = "";
+        
       switch(xhr.status){
       	case 200:
-      		content.innerHTML = '<b>Success!</b>';
+      		//content.innerHTML = '<b>Success!</b>';
       		break;
       	case 201:
       		content.innerHTML = '<b>Added item to marketplace.</b>';
@@ -35,12 +36,15 @@
       	//console.dir(obj);
       	//content.innerHTML += `<p>${xhr.response}</p>`;
         for(let listing of Object.keys(obj.listings)){
-          content.innerHTML += 
-            `<div>
-                <h4>${obj.listings[listing].name}</h3>
+          if(parseFloat(obj.listings[listing].price) <= maxPrice)
+          {
+            content.innerHTML += 
+              `<div class="itemForSale">
+                <h4>${obj.listings[listing].name}</h4>
                 <p>Price is $${obj.listings[listing].price}</p>
-                <p>${obj.listings[listing].email}</p>
-            </div>`;
+                <p>Contact at ${obj.listings[listing].email}</p>
+              </div>`;
+          }
         }  
           
       }else{
@@ -49,16 +53,25 @@
     };
       
     const requestUpdate = (e, userForm) => {
-      const url = userForm.querySelector('#urlField').value;
-      const method = userForm.querySelector('#methodSelect').value;
-      
+      //const url = userForm.querySelector('#urlField').value;
+      //const method = userForm.querySelector('#methodSelect').value;
+      const url = "/getListings";
+      const method = "get";
+      let maxPrice;
+        
+      if(userForm.querySelector('#priceSelect').value === ""){
+          maxPrice = "100";
+      } else{
+          maxPrice = userForm.querySelector('#priceSelect').value;
+      }
+        
       const xhr = new XMLHttpRequest();
       xhr.open(method,url);
       xhr.setRequestHeader("Accept","application/json");
       if(method === 'get'){
-      	xhr.onload = () => handleResponse(xhr,true);
+      	xhr.onload = () => handleResponse(xhr,true,maxPrice);
       }else{
-      	xhr.onload = () => handleResponse(xhr,false);
+      	xhr.onload = () => handleResponse(xhr,false,maxPrice);
       }
       
       xhr.send();
@@ -84,15 +97,9 @@
   <section id="top">
     <h3>Marketplace</h3>
     <form id="userForm" action="/getListings" method="get">
-      <select id='urlField'>
-        <option value='/getListings'>/getListings</option>
-        <option value='/notReal'>/notReal</option>
-      </select>
-      <select id="methodSelect">
-        <option value="get">GET</option>
-        <option value="head">HEAD</option>
-      </select>
-      <input type="submit" value="Get Listings" />
+      <label for="priceSelect">Max Price:</label>
+      <input id="priceSelect" type="number" name="priceSelect" min="0" max="10000" step="1" value="100" />
+      <input type="submit" value="Get Listings" id="formButton"/>
     </form>
   </section>
   <section id="content">

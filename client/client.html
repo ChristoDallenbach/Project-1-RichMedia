@@ -30,13 +30,13 @@
       		break;
       }
       
-      if(parseResponse){
-      	const obj = JSON.parse(xhr.response);
-      	console.dir(obj);
-      	content.innerHTML += `<p>${xhr.response}</p>`;
-      }else{
-      	content.innerHTML += `<p>metadata received</p>`;
-      }
+      //if(parseResponse){
+      //	const obj = JSON.parse(xhr.response);
+      //	console.dir(obj);
+      //	content.innerHTML += `<p>${xhr.response}</p>`;
+      //}else{
+      //	content.innerHTML += `<p>metadata received</p>`;
+      //}
     };
 
     const sendPost = (e, listingForm) => {
@@ -91,7 +91,7 @@
         <label for="email">Your Email: </label>
         <input id="emailField" type="email" name="email" />
       </div>
-      <input type="submit" value="Add Listing" />
+      <input type="submit" value="Add Listing"  id="formButton"/>
     </form>
   </section>
   <section id="content">

@@ -65,13 +65,6 @@ a:active {
     color: white;
 }
 
-#link {
-    width: 100%;
-    border: 1px solid black;
-    border-radius: 14px;
-}
-
-/* Input Field CSS */
 /* font-family: 'Crimson Text', serif; font-family: 'Source Sans Pro', sans-serif; */
 
 #inputDiv {
@@ -96,16 +89,50 @@ input {
     float: center;
 }
 
-input[type=text] {
-    
+input[type="submit"]{
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
-input[type=number] {
-    
+input[type="text"]{
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
-input[type=email] {
-    
+input[type="number"]{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+input[type="email"]{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+#formButton{
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: white;
+    color: black;
+}
+
+#formButton:hover{
+    background-color: #aec6cf;
+    color: white;
+}
+
+#formButton:active{
+    background-color: #aec6c0;
+    color: white;
 }
 
 /* Json Response CSS */
+h4 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.itemForSale {
+    border: 1px solid #aec6cf;
+    width: 70%;
+    margin: auto;
+}
+
+.itemForSale p{
+    font-size: 20px;
+}
